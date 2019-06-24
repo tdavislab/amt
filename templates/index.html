@@ -1,0 +1,185 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <meta content="Responsive Bootstrap Multi-Purpose Crypto Trading User Interface" name="description" />
+    <meta name="keywords" content="crypto, Bootstrap, bitcoins, ethereum, dogecoin, iota, ripple, siacoin, exchange, trading platform, crypto trading">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/style.css') }}">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/bootstrap.css') }}">
+    <link rel="icon" href="data:,">
+    <title>Average Merge Tree Visualization Tools</title>
+  </head>
+
+  <body>
+    
+    <section class="wrapperFullWidth">
+      <nav class="navbar navbar-default navbar-top navbar-fixed-top">
+        <div class="navbar-header">
+          <a class="navbar-brand">
+            <div class="brand-logo">A Structural Average of Labeled Merge Trees</div>
+          </a>
+	</div>
+	<div class="nav-wrapper">
+	  <ul class="nav navbar-nav mt0">
+	    <li class="dropdown dropdown-list">
+	      <a href="#" data-toggle="dropdown" data-play="fadeIn" class="dropdown-toggle">
+		  <input type="radio" checked="checked" title="Enforce label"  name="labelling-mode" value="trust-labels" onclick="disbtn(this.id);"><span class="label-mode"><b>Enforce label</b> <span class="anotation-mode"><center><b>Matching leaves according to the label</b></center><span class="line-a"></span><ol><li>Make sure that there is at least one same label across the trees.</li><li>Leaves without matched labels will be mapped according to selected "Leaves Mapping Strategy".</li></ol></span></span> <input type="radio" name="labelling-mode" title="Ignore label"  value="not-trust-labels" onclick="disbtn(this.value);"><span class="label-mode"><b>Ignore label</b><span class="anotation-mode"><center><b>Ignore all labels.</b></center><span class="line-a"></span><ol><li>Matching leaves according to selected "Leaves Mapping Strategy".</li><li>Purely tree distance strategy will not be considered under this mode.</li></ol></span></span><span class="line-b"></span><input type="radio" title="Tree distance"  name="mapping-mode" value="td-mapping" id="PTD" onclick="disbtn2(this.value);"><span class="label-mode">Tree distance</span><input type="radio" title="Euclidean distance"  name="mapping-mode" value="ed-mapping" onclick="disbtn2(this.value);"><span class="label-mode">Euclidean distance</span><input type="radio" checked="checked" title="Tree & Euclidean distance"  name="mapping-mode" value="et-mapping" onclick="disbtn2(this.value);"><span class="label-mode"> Tree & Euclidean distance<span class="anotation-mode2">Please specify a parameter &#955 for Euclidean distance. Default 0.5 means half and half. </span></span><span id="slider2"></span>
+	      </a>
+	    </li>    
+	  </ul>
+	</div>
+      </nav>
+      <section>
+	<section class="main-content">
+	  <div class="upper-title">
+	    <div class="row">
+	      <div class="col-md-4">
+		<h4>Drawing Panel</h4>
+	      </div>
+	      <div class="col-md-4">
+		<h4>Control Panel</h4>
+	      </div>
+	      <div class="col-md-4">
+		<h4>Consistency Visualization</h4>
+	      </div>
+	    </div>
+	  </div>
+
+	  <div class="upper-panel">
+	    <div class="row">
+	      <div class="col-md-4">
+		<div id="graph1" style="width:33.33333333%; float:left;" tabindex="0">
+		  <div id="toolbox">
+		    <input type="image" id="confirm-input" title="Confirm the tree" src="static/fig/download-icon.png" alt="Confirm the tree"> <input id="add-input" type="image" title="Add a new tree" src="static/fig/add-icon.png" alt="Add a new tree"> <input type="image" id="help" title="help" src="static/fig/help-icon.png" alt="help">
+		  </div>
+		</div>
+              </div>
+	      <div class="col-md-4">
+		<div class="row">
+		  <div class="col-md-7">
+		    <div id="graph2" style="width:33.333333333%; float:left;" tabindex="1">
+		      <div id="toolbox2">
+			<input type="image" id="help-control" title="help" src="static/fig/help-icon.png" alt="help">
+		      </div>
+		    </div>
+		  </div>
+		  <div class="col-md-5 nopadding">
+		    <div id="control-panel">
+		      <div id="toolbox-Go">
+			<input  type="image" id="start" title="start calculation" src="static/fig/start-cal-icon.png" alt="start calculation">
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		<div class="row">
+		  <h4>Animation</h4>
+		</div>		
+		<div class="row" >
+		  <div class="col-md-8">
+		    <div id="graph4" style="width:33.333333333%; float:left;" tabindex="3">
+		    </div>
+		    <div id="toolbox-CV2">
+			<input  type="image" class="selected-icon LGA" title="linear animation" src="static/fig/linear-icon.png" alt="linear animation"><br><input type="image" class="LGA" title="geodesic animation" src="static/fig/geodesic-icon.png" alt="help"><br><input id="id-colored" class="leftmargin2 LCA" type="image" title="colored by label" src="static/fig/label-icon.png" alt="colored by labeling id"><br><input type="image" class="LCA selected-icon" title="colored by consistent value with varying color" src="static/fig/CV-color-icon.png" alt="colored by consistent value with varying color">
+		    </div>
+		  </div>
+		  <div class="col-md-4 nopadding">
+		    <div id="Animation-Trees">
+		    </div>
+		  </div>
+		</div>
+	      </div>
+	      <div  class="col-md-4">
+		<div id="graph3" style="width:33.333333333%; float:left;" tabindex="2">
+		  <div id="toolbox-CV">
+		    <input id="label-display"  onclick="disbtn3(this.name);" name="label" class="CV" type="image" title="label" src="static/fig/label-icon.png" alt="label"><span>Label</span>
+		    <input type="image" onclick="disbtn3(this.name);" name="CV1" class="CV selected-icon topmargin" title="circular glyph" src="static/fig/circular-icon.png" alt="circular glyph"><span>Graduated circular</span>
+		    <input type="image"  onclick="disbtn3(this.name);"  name="CV2" class="CV topmargin" title="line glyph" src="static/fig/line-icon.png" alt="line glyph"> <div>Graduated line</div>
+		    <input type="image"  onclick="disbtn3(this.name);"  name="CV3" class="CV topmargin" title="ribbon glyph" src="static/fig/ribbon-icon.png" alt="ribbon glyph"><div>Graduated ribbon</div>
+		    <input type="image"  onclick="disbtn3(this.name);" class="CV topmargin" name="SCV1"  title="statistic circular glyph" src="static/fig/scircular-icon.png" alt="circular glyph"><div id="SCV1"></div>
+		    <input type="image"   onclick="disbtn3(this.name);" class="CV topmargin" name="SCV2"  title="statistic line glyph" src="static/fig/sline-icon.png" alt="line glyph"> <div id="SCV2"></div>
+		    <input type="image"   onclick="disbtn3(this.name);" class="CV topmargin" name="SCV3"  title="statistic ribbon glyph" src="static/fig/sribbon-icon.png" alt="ribbon glyph"><div id="SCV3"></div>
+		  </div>
+
+		  <div id="toolbox-CM">
+		    <input type="image" id="cmg1" class="CMg  selected-icon" title="1" src="static/fig/1-icon.png" alt="set8">
+		    <input type="image" id="cmg2" class="CMg leftmargin" title="2" src="static/fig/2-icon.png" alt="set8">
+		    
+		    <input type="image" id="cmg3" class="CMg leftmargin" title="3" src="static/fig/3-icon.png" alt="set8">
+		    <input type="image" id="cmg4" class="CMg leftmargin" title="4" src="static/fig/4-icon.png" alt="set8">
+		    <input type="image" id="cmg5" class="CMg leftmargin" title="5" src="static/fig/5-icon.png" alt="set8">
+		    <input type="image" id="cmg6" class="CMg leftmargin" title="6" src="static/fig/6-icon.png" alt="set8">
+		    <input type="image" id="cmg7" class="CMg leftmargin" title="7" src="static/fig/7-icon.png" alt="set8">
+		    <input type="image" id="cmg8" class="CMg leftmargin" title="8" src="static/fig/8-icon.png" alt="set8">	
+		  </div>
+		</div>
+	      </div>
+	    </div>
+	  </div>
+	  <div class="tree-display">
+	    <div class="row">
+	      <div class="col-md-12 row-height">
+		<h4>Ensemble</h4>
+		<span class="line"></span>
+		<div id="Trees">
+		</div>
+	      </div>
+	    </div>
+	  </div>
+	</section>
+      </section>
+    </section>
+    <script>
+      
+      function disbtn(id) { 
+          if ( id == "not-trust-labels" ) {
+             document.getElementById("PTD").setAttribute("disabled","disabled");
+          } else {
+             document.getElementById("PTD").removeAttribute("disabled");
+          }
+      }
+
+      function disbtn2(id) { 
+          if ( id == "et-mapping" ) {          
+             document.getElementById("ED_params").removeAttribute("disabled");
+      } else {
+             document.getElementById("ED_params").setAttribute("disabled","disabled");
+      }
+      }
+      
+      function disbtn3(name) {
+      if(name=="SCV1"||name=="SCV2"||name=="SCV3"){
+      document.getElementById("cmg1").setAttribute("src","static/fig/set1-icon.png");
+      document.getElementById("cmg2").setAttribute("src","static/fig/set2-icon.png");
+      document.getElementById("cmg3").setAttribute("src","static/fig/set3-icon.png");
+      document.getElementById("cmg4").setAttribute("src","static/fig/set4-icon.png");
+      document.getElementById("cmg5").setAttribute("src","static/fig/set5-icon.png");
+      document.getElementById("cmg6").setAttribute("src","static/fig/set6-icon.png");
+      document.getElementById("cmg7").setAttribute("src","static/fig/set7-icon.png");
+      document.getElementById("cmg8").setAttribute("src","static/fig/set8-icon.png");
+      
+
+      }else{
+      document.getElementById("cmg1").setAttribute("src","static/fig/1-icon.png");
+      document.getElementById("cmg2").setAttribute("src","static/fig/2-icon.png");
+      document.getElementById("cmg3").setAttribute("src","static/fig/3-icon.png");
+      document.getElementById("cmg4").setAttribute("src","static/fig/4-icon.png");
+      document.getElementById("cmg5").setAttribute("src","static/fig/5-icon.png");
+      document.getElementById("cmg6").setAttribute("src","static/fig/6-icon.png");
+      document.getElementById("cmg7").setAttribute("src","static/fig/7-icon.png");
+      document.getElementById("cmg8").setAttribute("src","static/fig/8-icon.png");
+      }
+      }
+      
+    </script>
+    <script src="https://d3js.org/d3.v3.js" charset="utf-8"></script>
+    <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+    <script src="https://cdn.jsdelivr.net/filesaver.js/0.1/FileSaver.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="{{url_for('static', filename='d3-dropdownmenu.js')}}"></script>
+    <script src="{{url_for('static', filename='simpleD3Slider.js')}}"></script>
+    <script src="{{url_for('static', filename='script.js')}}"></script>
+  </body>
+
+</html>

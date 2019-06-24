@@ -1,0 +1,740 @@
+@import url(https://fonts.googleapis.com/css?family=PT+Sans:400italic,400,700);
+html{
+    height:100%;
+}
+body{
+    height:100%;
+    margin: 0;
+    padding: 0;
+    background: #eef0f4 !important;
+    overflow:hidden;
+}
+
+.main-content{
+    padding:0px 0px;
+    background: #eef0f4;
+}
+
+.line {
+      clear: both;
+      display: block;
+      width: 100%;
+      margin: 0;
+      padding: 0 0 0 0;
+      border-bottom: 2px solid #2b303c;
+      background: transparent;
+    }
+
+.line-a {
+      clear: both;
+      display: block;
+      width: 100%;
+      margin-top: 5px;
+      margin-bottom: 4px;
+      padding: 0 0 0 0;
+      border-bottom: 2px solid white;
+      background: transparent;
+    }
+
+.line-b { 
+      height: 100%;
+      padding: 0px 0px 5px 15px;
+      border-left: 3px solid #c8cbd1;
+      background: transparent;
+      font-size: 25px;
+      margin-left: 15px;
+      margin-right: 0px;
+    }
+
+.navbar-top{
+    -webkit-backface-visibility:hidden;
+    margin-bottom:0;
+    position:relative;
+}
+
+@media only screen and (min-width: 768px) {
+    .navbar-top .navbar-header{
+        width:420px;
+	height: 58px;
+        text-align:center;
+    }
+    .navbar-top .navbar-header .navbar-brand{
+        width:100%;
+    }
+}
+.navbar-top .navbar-header{
+    position:relative;
+    background-color:#2b303c;
+    z-index:11;
+}
+.navbar-top .navbar-header .navbar-brand{
+    color:#fff;
+    font-weight:600;
+}
+.navbar-top .navbar-header .brand-logo{
+    display:block;
+}
+.navbar-top .navbar-header .brand-logo-collapsed{
+    display:none;
+}
+.nav-wrapper{
+    padding:0 15px;
+}
+@media only screen and (max-width: 768px) {
+.nav-wrapper{
+    padding:0 15px;
+    border-top: 5px solid #fff;
+}
+}
+.nav-wrapper .nav.navbar-nav{
+    float:left;
+}
+.nav-wrapper .nav.navbar-nav.navbar-right{
+    float:right;
+}
+
+@media only screen and (max-width: 767px) {
+    .wrapperFullWidth {
+        margin-top:0px;
+    }
+}
+@media only screen and (min-width: 768px) {
+.wrapperFullWidth {
+	margin-top: 55px;
+}
+}
+
+.dropdown-list{
+    margin:0;
+    border-radius:0;
+    border-left:0;
+    border-right:0;
+    border-top:0;
+    border-bottom:0;
+}
+
+.dropdown>a{
+    position:absolute;
+}
+
+.main-content>.upper-title>.row>.col-md-4>h4 {
+    font-size:20px;
+    color: #2b303c;
+    margin: 10px;
+    margin-left: 20px;
+    font-weight:700;
+}
+
+.main-content>.upper-panel>.row>.col-md-4>.row>h4 {
+    font-size:20px;
+    color: #2b303c;
+    margin: 10px;
+    margin-left: 20px;
+    font-weight:700;
+}
+
+
+.main-content>.tree-display>.row>.col-md-12>h4 {
+    font-size:20px;
+    color: #2b303c;
+    margin: 10px;
+    font-weight:700;
+}
+
+.nopadding {
+   padding: 0 !important;
+   margin: 0 !important;
+}
+
+
+.main-content>.tree-display {
+    display:table;
+    width: 100%;
+    height: 100%;
+    padding: 0 0 0 0; 
+    box-sizing: border-box;
+}
+
+
+.main-content>.tree-display>.row{
+    margin-top: 10px;
+    margin-left: 5px;
+    margin-right: 5px
+}
+
+.main-content>.upper-panel>.row{
+    margin-top: 0px;
+    margin-left: 5px;
+    margin-right: 5px
+}
+
+.main-content>.upper-title>.row{
+    margin-top: 20px;
+}
+
+.main-content>.tree-display>.row>.row-height {
+    height: 100%;
+    min-height: 100%;
+}
+
+p{ 
+     text-align: center; 
+     overflow: overlay;
+     position: relative;
+     font-size: 25px;
+}
+
+#toolbox{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin-bottom: 0.5em;
+    margin-left: 1.2em;
+    border: 2px solid #EEEEEE;
+    border-radius: 5px;
+    padding: 1em;
+    z-index: 5;
+}
+
+.toolbox-tree{
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 0.5em;
+    margin-left: 1.2em;
+    border: 2px solid #EEEEEE;
+    border-radius: 5px;
+    padding: 0.25em;
+    z-index: 5;
+}
+
+#toolbox-animation{
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: 0.5em;
+    margin-right: 11%;
+    border: 2px solid #EEEEEE;
+    border-radius: 5px;
+    padding: 0.5em;
+    z-index: 5;
+}
+
+#toolbox-animation input{
+    height: 35px;
+    opacity: 0.4;
+}
+
+#toolbox-animation input:hover{
+    opacity: 1;
+    cursor: pointer;
+}
+
+
+#toolbox-CV{
+    position: absolute;
+    top: 5px;
+    right: 1em;
+    width: 85px;
+    margin-bottom: 0.5em;
+    border: 2px solid #EEEEEE;
+    border-radius: 5px;
+    text-align: center;
+    padding: 0.5em;
+    z-index: 5;
+}
+
+#toolbox-CM{
+    position: absolute;
+    bottom: 0px;
+    left: 2em;
+    margin-bottom: 0.5em;
+    text-align: center;
+    z-index: 5;
+}
+
+
+#toolbox-CV input{
+    width: 40px;
+    opacity: 0.4;
+}
+
+
+#toolbox-CV2 input:hover{
+    opacity: 1;
+    cursor: pointer;
+}
+
+#toolbox-CV2 .selected-icon{
+    opacity: 1; 
+    width: 40px;
+}
+
+#toolbox-CV .selected-icon{
+    opacity: 1; 
+    width: 50px;
+}
+
+#toolbox-CM .selected-icon{
+    opacity: 1; 
+    width: 50px;
+}
+
+#toolbox-CV2{
+    position: absolute;
+    top: 5px;
+    right: 0;
+    margin-bottom: 0.5em;
+    margin-right: 1em;
+    text-align: center;
+    border: 2px solid #EEEEEE;
+    border-radius: 5px;
+    padding: 0.5em;
+    z-index: 5;
+}
+
+
+
+#toolbox-CV2 input{
+    width: 35px;
+    opacity: 0.4;
+}
+
+#toolbox-CV input:hover{
+    opacity: 1;
+    cursor: pointer;
+}
+
+
+.toolbox-tree input{
+    width: 20px;
+    opacity: 0.4;
+}
+
+.toolbox-tree input:hover{
+    opacity: 1;
+    cursor: pointer;
+}
+
+
+#toolbox2{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin-bottom: 0.5em;
+    margin-left: 1.2em;
+    border: 2px solid #EEEEEE;
+    border-radius: 5px;
+    padding: 0em;
+    z-index: 5;
+}
+
+
+#toolbox2 input{
+    width: 20px;
+    opacity: 0.4;
+}
+
+#toolbox2 input:hover{
+    opacity: 1;
+    cursor: pointer;
+}
+
+
+
+#toolbox input{
+    width: 30px;
+    opacity: 0.4;
+}
+#toolbox input:hover{
+    opacity: 1;
+    cursor: pointer;
+}
+
+
+#toolbox-Go{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin-bottom: 0.5em;
+    margin-right: 0px;
+    padding: 0.5em;
+    z-index: 5;
+}
+
+#toolbox-Go input{
+    height: 45px;
+    opacity: 0.4;
+}
+
+#toolbox-Go input:hover{
+    opacity: 1;
+    cursor: pointer;
+}
+
+
+
+#toolbox-CM input{
+    width: 40px;
+    opacity: 0.4;
+}
+
+
+#toolbox-CM input:hover{
+    opacity: 1;
+    cursor: pointer;
+}
+
+#hidden-file-upload{
+    display: none;
+}
+
+#download-input{
+    margin: 0 0.5em;
+}
+
+.leftmargin{
+    margin-left: 15px;
+
+}
+
+
+.topmargin{
+    margin-top: 8px;
+
+}
+.leftmargin2{
+    margin-top: 10px;
+
+}
+
+.conceptG text{
+    pointer-events: none;
+}
+
+marker{
+    fill: #333;
+}
+
+g.conceptG circle{
+    fill: #F6FBFF;
+    stroke: #333;
+    stroke-width: 2px;
+}
+
+g.conceptG:hover circle{
+    fill: #CAE4DB;
+}
+
+g.selected circle{
+    fill: #9ba3b7;
+}
+g.selected:hover circle{
+    fill: #9ba3b7;
+}
+
+.circle-display{
+    fill: #F6FBFF;
+    stroke: #333;
+    stroke-width: 1px;
+}
+
+.circle-fixed{
+    fill: #9ba3b7;
+    stroke: #333;
+    stroke-width: 2px;
+}
+
+path.link {
+    fill: none;
+    stroke: #333;
+    stroke-width: 4px;
+    cursor: default;
+}
+
+path.link:hover{
+    stroke: #CAE4DB;
+}
+
+g.connect-node circle{
+    fill: #BEFFFF;
+}
+
+path.link.hidden{
+    stroke-width: 0;
+}
+
+path.link.selected {
+    stroke: #9ba3b7;
+}
+
+.NotLeaf{
+    fill: #333;
+    stroke: #333;
+    stroke-width: 2px;
+
+}
+.IsLeaf{
+    fill: #8e0c01;
+    stroke: #333;
+    stroke-width: 2px;
+}
+
+.IsULLeaf{
+    fill: #006400;
+    stroke: #333;
+    stroke-width: 2px;
+}
+
+.trees{
+    background-color: white;
+    margin-left: 0em;
+    margin-right: 10px;
+}
+
+.trees:hover{
+    background-color: #CAE4DB;
+    cursor: pointer
+}
+
+.trees.selected-tree{
+    background-color: #9ba3b7;
+}
+
+.node {
+    cursor: pointer;
+    fill: #2b303c;
+    stroke: #333;
+    stroke-width: 1.5px;
+}
+
+.node:hover{
+    stroke: #CAE4DB;
+    stroke-width: 3px;
+}
+
+#tree-AMT {
+    cursor: pointer;
+    fill: #d20a11;
+    stroke: #333;
+    stroke-width: 1.5px;
+    font-size: 15px;
+}
+
+.colormap{
+    font-size: 20px
+}
+
+
+#tree-AMT:hover{
+    stroke: #CAE4DB;
+    stroke-width: 3px;
+}
+
+.node text {
+    pointer-events: none;
+    font-size: 13px;
+    stroke-width: 0;
+    fill: white;
+    font-weight:700;
+}
+
+.edge {
+    cursor: pointer;
+    stroke-width: 2;
+}
+
+
+.edge:hover{
+    stroke: #CAE4DB
+}
+
+.node.select {
+    stroke: #9ba3b7;
+    fill: #333;
+    stroke-width: 3px;
+}
+
+#tree-AMT.select{
+    stroke: #9ba3b7;
+    fill: #d20a11;
+    stroke-width: 3px;
+}
+
+.edge.select {
+    stroke: #9ba3b7;
+}
+
+
+.anotation-mode {
+  visibility: hidden;
+  width: 340px;
+  background-color: #333;
+  color: #fff;
+  text-align: justify;
+  border-radius: 6px;
+  padding: 5px 5px;
+
+  position: absolute;
+  z-index: 1;
+  top: 100%;
+  left: 0%;
+  margin-left: 0px;
+}
+
+.scv{
+visibility: hidden;
+}
+
+.anotation-mode2 {
+  visibility: hidden;
+  width: 340px;
+  background-color: #333;
+  color: #fff;
+  text-align: justify;
+  border-radius: 6px;
+  padding: 5px 5px;
+
+  position: absolute;
+  z-index: 1;
+  top: 100%;
+  left: 0%;
+  margin-left: 520px;
+}
+
+
+.anotation-mode3 {
+  visibility: hidden;
+  width: 290px;
+  background-color: #333;
+  color: #fff;
+  text-align: justify;
+  border-radius: 6px;
+  padding: 5px 5px;
+
+  position: absolute;
+  z-index: 1;
+  top: 100%;
+  left: 0%;
+}
+
+.label-mode{
+    font-size: 17px;
+    margin-left: 5px;
+    margin-right: 8px;
+}
+
+.label-mode:hover .anotation-mode {
+  visibility: visible;
+}
+
+.label-mode:hover .anotation-mode2 {
+  visibility: visible;
+}
+
+.animation-text:hover{
+  cursor: pointer;
+}
+
+.animation-text:hover .anotation-mode3 {
+  visibility: visible;
+}
+
+#control{
+    position: absolute;
+    top: 0;
+    right: 60px;
+    margin-top: 0.5em;
+    margin-right: 1.2em;
+    padding: 1em;
+    z-index: 5;
+}
+
+#control-delta{
+    position: absolute;
+    top: 42%;
+    right: 200px;
+    
+    z-index: 5;
+}
+
+.animation-text{
+    font-size: 15px;
+    margin-left: 5px;
+    padding-bottom: 2px;
+    color: #333;
+}
+
+.animation-text-left:hover{
+  cursor: pointer;
+}
+
+.animation-text-left{
+    font-size: 15px;
+    color: #333;
+    float: right;
+    display:inline-block;
+    height: 20px;
+}
+
+#ED_params{
+  width: 45px;
+  height: 30px;
+  margin-right: 10px
+}
+
+#GA_params{
+  width: 45px;
+  height: 30px;
+  margin-left: 10px
+}
+
+
+.function{
+    font-size: 20px;
+    color: #333;
+}
+
+#control2{
+    position: absolute;
+    top: 0px;
+    right: 70px;
+    z-index: 5;
+}
+
+#control3{
+    position: absolute;
+    top: 120px;
+    right: 80px;
+    z-index: 5;
+}
+
+#control4{
+    position: absolute;
+    top: 240px;
+    right: 80px;
+    z-index: 5;
+}
+
+.border-between > [class*='col-']:before {
+   background: #333;
+   bottom: 0;
+   content: " ";
+   left: 0;
+   position: absolute;
+   width: 1px;
+   top: 0;
+}
+
+.border-between > [class*='col-']:first-child:before {
+   display: none;
+}
+
+.annotations-text{
+   font-size: 16px
+}
+
+
+.param-text{
+   font-size: 18px
+}
+
