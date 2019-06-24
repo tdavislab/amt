@@ -1061,14 +1061,14 @@ def calculate_IL_dist_for_GA(MGs, Tcnt, M, GA_param):
 
 def calculate_local_dist_for_Trees(Trees, Tcnt, Udist, DELTA, mapping_mode, ED_param):
     ldist = np.zeros(len(Udist))
-    print "--------"
-    print Udist
-    print "start"
+    #print "--------"
+    #print Udist
+    #print "start"
     for i in range(0, Tcnt):
         Trees['tree-'+str(i+1)]['local-dist'] = calculate_local_dist(Trees['tree-'+str(i+1)]["Nodes"], Trees['tree-'+str(i+1)]["Edges"], Udist, DELTA, mapping_mode, ED_param)
-        print Trees['tree-'+str(i+1)]['local-dist']
+        #print Trees['tree-'+str(i+1)]['local-dist']
         ldist += Trees['tree-'+str(i+1)]['local-dist']
-    print "--------------"
+    #print "--------------"
     ldist = ldist/Tcnt
     Uldist = []
     for i in range(0, Tcnt):
@@ -1104,7 +1104,7 @@ def calculate_local_dist_for_GA(MGs, Tcnt, GA_param, Udist, DELTA, mapping_mode,
 
 def calculate_local_dist(nodes, links, dist2, DELTA, mapping_mode, ED_param):
     dist1 = calculate_whole_dist_matrix(nodes, links, mapping_mode, ED_param)
-    print dist1
+    #print dist1
     dist = np.zeros(len(nodes))
     for i in range(0, len(nodes)):
         dist[i] = calculate_weighted_cosine_similarity(dist1[i], dist2[i], DELTA)
