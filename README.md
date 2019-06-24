@@ -6,7 +6,7 @@ This is visualization tools for calculating 1-center tree. The implementation is
 
 # How to use
 
-Tested with both Python 2.7 and Ubuntu 16.04.
+Tested with both Python 2.7, MacOS 10.10 and Ubuntu 16.04.
 
 ### What to expect
 
