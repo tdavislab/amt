@@ -16,6 +16,7 @@ You can:
 - set related parameters and view the relation between 1-center and ensemble members in "Control Panel".
 - view an animated sequence between an input tree and the 1-center via geodesic or linear strategy in "Animation".
 - view vertex and edge consistency for each ensemble member, variational and statistical consistency for 1-center tree in "Consistency Visualization".
+
 <center><img src="2.png" width="512"></center>
 
 ### Run
@@ -33,4 +34,5 @@ You can:
 
 - The documents and comments are still in progress.
 - Application to scalar field ensembles(refer to section 7 of above paper) will be uploaded in the following weeks.
+
 <center><img src="3.png" width="512"></center>
