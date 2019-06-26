@@ -93,13 +93,16 @@
 	      <div  class="col-md-4">
 		<div id="graph3" style="width:33.333333333%; float:left;" tabindex="2">
 		  <div id="toolbox-CV">
-		    <input id="label-display"  onclick="disbtn3(this.name);" name="label" class="CV" type="image" title="label" src="static/fig/label-icon.png" alt="label"><span>Label</span>
-		    <input type="image" onclick="disbtn3(this.name);" name="CV1" class="CV selected-icon topmargin" title="circular glyph" src="static/fig/circular-icon.png" alt="circular glyph"><span>Graduated circular</span>
-		    <input type="image"  onclick="disbtn3(this.name);"  name="CV2" class="CV topmargin" title="line glyph" src="static/fig/line-icon.png" alt="line glyph"> <div>Graduated line</div>
-		    <input type="image"  onclick="disbtn3(this.name);"  name="CV3" class="CV topmargin" title="ribbon glyph" src="static/fig/ribbon-icon.png" alt="ribbon glyph"><div>Graduated ribbon</div>
-		    <input type="image"  onclick="disbtn3(this.name);" class="CV topmargin" name="SCV1"  title="statistic circular glyph" src="static/fig/scircular-icon.png" alt="circular glyph"><div id="SCV1"></div>
-		    <input type="image"   onclick="disbtn3(this.name);" class="CV topmargin" name="SCV2"  title="statistic line glyph" src="static/fig/sline-icon.png" alt="line glyph"> <div id="SCV2"></div>
-		    <input type="image"   onclick="disbtn3(this.name);" class="CV topmargin" name="SCV3"  title="statistic ribbon glyph" src="static/fig/sribbon-icon.png" alt="ribbon glyph"><div id="SCV3"></div>
+		    <input id="label-display"  onclick="disbtn3(this.name);" name="label" class="CV" type="image" title="label" src="static/fig/label-icon.png" alt="label">
+		    <input id="CV1" type="image" onclick="disbtn3(this.name);" name="CV1" class="CV topmargin" title="circular glyph" src="static/fig/circular-icon.png" alt="circular glyph">
+		    <input id="CV2" type="image"  onclick="disbtn3(this.name);"  name="CV2" class="CV topmargin" title="line glyph" src="static/fig/line-icon.png" alt="line glyph">
+		    <input id="CV3" type="image"  onclick="disbtn3(this.name);"  name="CV3" class="CV topmargin" title="ribbon glyph" src="static/fig/ribbon-icon.png" alt="ribbon glyph">
+		     <input id="CV21" type="hidden" onclick="disbtn3(this.name);" name="CV1" class="CV topmargin" title="circular glyph" src="static/fig/cicular-2-icon.png" alt="circular glyph">
+		    <input id="CV22" type="hidden"  onclick="disbtn3(this.name);"  name="CV2" class="CV topmargin" title="line glyph" src="static/fig/line-2-icon.png" alt="line glyph">
+		    <input id="CV23" type="hidden"  onclick="disbtn3(this.name);"  name="CV3" class="CV topmargin" title="ribbon glyph" src="static/fig/ribbon-2-icon.png" alt="ribbon glyph">
+		    <input type="image"  onclick="disbtn3(this.name);" id="SSCV1" class="CV selected-icon topmargin" name="SCV1"  title="statistic circular glyph" src="static/fig/scircular-icon.png" alt="circular glyph">
+		    <input type="image"   onclick="disbtn3(this.name);" id="SSCV2"  class="CV topmargin" name="SCV2"  title="statistic line glyph" src="static/fig/sline-icon.png" alt="line glyph"> 
+		    <input type="image"   onclick="disbtn3(this.name);" id="SSCV3" class="CV topmargin" name="SCV3"  title="statistic ribbon glyph" src="static/fig/sribbon-icon.png" alt="ribbon glyph">
 		  </div>
 
 		  <div id="toolbox-CM">
@@ -120,7 +123,7 @@
 	  <div class="tree-display">
 	    <div class="row">
 	      <div class="col-md-12 row-height">
-		<h4>Ensemble</h4>
+		<h4>Ensemble Panel</h4>
 		<span class="line"></span>
 		<div id="Trees">
 		</div>

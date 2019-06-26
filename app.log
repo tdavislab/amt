@@ -1,0 +1,75 @@
+*** Starting uWSGI 2.0.17.1 (64bit) on [Thu Jan 24 15:34:14 2019] ***
+compiled with version: 5.4.0 20160609 on 24 January 2019 22:29:40
+os: Linux-4.15.0-43-generic #46~16.04.1-Ubuntu SMP Fri Dec 7 13:31:08 UTC 2018
+nodename: lin-XPS-15-9560
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 8
+current working directory: /home/lin/Documents/Utah/MT_Vis/Version6-JS_python-Leaves-partial-labeled
+detected binary path: /usr/local/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /home/lin/Documents/Utah/MT_Vis/Version6-JS_python-Leaves-partial-labeled
+your processes number limit is 30888
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address //home/lin/Documents/Utah/MT_Vis/Version6-JS_python-Leaves-partial-labeled/app.sock fd 3
+uwsgi socket 1 bound to TCP address 127.0.0.1:8000 fd 4
+Python version: 2.7.12 (default, Nov 12 2018, 14:36:49)  [GCC 5.4.0 20160609]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x16b4540
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 291680 bytes (284 KB) for 3 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x16b4540 pid: 27725 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 27725)
+spawned uWSGI worker 1 (pid: 27743, cores: 1)
+spawned uWSGI worker 2 (pid: 27744, cores: 1)
+spawned uWSGI worker 3 (pid: 27745, cores: 1)
+SIGINT/SIGQUIT received...killing workers...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket //home/lin/Documents/Utah/MT_Vis/Version6-JS_python-Leaves-partial-labeled/app.sock removed.
+*** Starting uWSGI 2.0.17.1 (64bit) on [Thu Jan 24 15:36:49 2019] ***
+compiled with version: 5.4.0 20160609 on 24 January 2019 22:29:40
+os: Linux-4.15.0-43-generic #46~16.04.1-Ubuntu SMP Fri Dec 7 13:31:08 UTC 2018
+nodename: lin-XPS-15-9560
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 8
+current working directory: /home/lin/Documents/Utah/MT_Vis/Version6-JS_python-Leaves-partial-labeled
+detected binary path: /usr/local/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /home/lin/Documents/Utah/MT_Vis/Version6-JS_python-Leaves-partial-labeled
+your processes number limit is 30888
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address //home/lin/Documents/Utah/MT_Vis/Version6-JS_python-Leaves-partial-labeled/app.sock fd 3
+uwsgi socket 1 bound to TCP address 127.0.0.1:8000 fd 4
+Python version: 2.7.12 (default, Nov 12 2018, 14:36:49)  [GCC 5.4.0 20160609]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x2285540
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 291680 bytes (284 KB) for 3 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x2285540 pid: 27908 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 27908)
+spawned uWSGI worker 1 (pid: 27926, cores: 1)
+spawned uWSGI worker 2 (pid: 27927, cores: 1)
+spawned uWSGI worker 3 (pid: 27928, cores: 1)
+invalid request block size: 21573 (max 4096)...skip
+SIGINT/SIGQUIT received...killing workers...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket //home/lin/Documents/Utah/MT_Vis/Version6-JS_python-Leaves-partial-labeled/app.sock removed.

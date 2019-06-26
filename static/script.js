@@ -511,6 +511,7 @@ document.onload = (function(d3, saveAs, Blob, undefined){
 	    
 	    text.exit().remove();
 	    */
+	   
 	};
 	/*
 	thisGraph.zoomed = function(){
@@ -584,43 +585,34 @@ document.onload = (function(d3, saveAs, Blob, undefined){
     var tids = [];
 
     var AM = 'LA';
-    var a_s = 1.7,
-	at_s = 4.2;
+  
   
     var cm_set = 1;
-    var DS = "UV",
+    var DS = "SUV1",
 	MTS = "MT2"
     var selected_node = "AMT";
     var selected_edge = -1;
     var circle, paths, dt, colorScale;
     var nTrees = [];
-    var hidden_flag = 0;
-    var hidden_num = 0;
+    var hidden_flag_cm = 0,
+	hidden_flag_scv = 0;
     d3.selectAll(".CV").on("click", function(){
 	d3.selectAll(".CV").classed("selected-icon", false);
 	d3.select(this).classed("selected-icon", true);
 	switch(this.title){
 	case "label":
 	    DS = "LS"
-	    if (hidden_flag==0){
-		d3.selectAll(".colormap").remove();
-		d3.select('input[id="cmg1"]').node().type="hidden";
-		d3.select('input[id="cmg2"]').node().type="hidden";
-		d3.select('input[id="cmg3"]').node().type="hidden";
-		d3.select('input[id="cmg4"]').node().type="hidden";
-		d3.select('input[id="cmg5"]').node().type="hidden";
-		d3.select('input[id="cmg6"]').node().type="hidden";
-		d3.select('input[id="cmg7"]').node().type="hidden";
-		d3.select('input[id="cmg8"]').node().type="hidden";
-		hidden_flag = 1;
-		hidden_num = 8;
-	    }
+	    hide_colormap();
 	    break;
 	case "circular glyph":
+	    d3.select("#CV1").classed("selected-icon", true);
+	    d3.select("#CV21").classed("selected-icon", true);
 	    DS = "UV";
 	    break;
 	case "line glyph":
 	    DS = "UV2";
+	    d3.select("#CV2").classed("selected-icon", true);
+	    d3.select("#CV22").classed("selected-icon", true);
 	    break;
 	case "statistic circular glyph":
 	    DS = "SUV1";
@@ -633,18 +625,14 @@ document.onload = (function(d3, saveAs, Blob, undefined){
 	    break;
 	default:
 	    DS = "UV3";
+	    d3.select("#CV3").classed("selected-icon", true);
+	    d3.select("#CV23").classed("selected-icon", true);
 	    break;
 	}
-	if (DS!="LS" && selected_node=="AMT"){
-	    	if (hidden_flag==1){
-		    for (var i = 0; i < hidden_num; i++){
-			d3.select('input[type="hidden"]').node().type="image";
-		    }
-		    insert_colormap_txt();
-		    hidden_flag=0;
-		}
+	if (DS!="LS"){
+	    show_colormap();
 	}
-
+	
 	if (nTrees.status=="success"){
 	    DRAW_TREE(nTrees, DS, svg3, selected_node, circle, paths, colorScale, MTS);
 	}
@@ -714,6 +702,35 @@ document.onload = (function(d3, saveAs, Blob, undefined){
 	    .attr("fill", "white")
 	    .text(tid)
 	    .attr("class", "display-text");
+    }
+    
+    
+    function add_titles_for_animation(svg, title){
+    svg.append("circle")
+    	.attr("r", 28)
+    	.attr("cx", svg_animation_width-12)
+    	.attr("cy", 12)
+    	.attr("fill", "#2b303c")
+    	.attr("class", "annotations");
+    
+    svg.append("text")
+	.attr("dy", 22)
+	.text(title)
+	.style('fill', 'white')
+	.attr("class", "annotations-text")
+	.attr("text-anchor", "middle")
+	.attr("font-size", "22px")
+	.attr("dx", svg_animation_width-18);
+    }
+    
+    function insert_annotation_animation(svg, id){
+	svg.append("text")
+	.text(id)
+	.attr("dy", 25)
+	.style('fill', 'white')
+	.attr("text-anchor", "middle")
+	.attr("font-size", "25px")
+	.attr("dx", svg_animation_width-18);
     }
 
 
@@ -801,7 +818,7 @@ document.onload = (function(d3, saveAs, Blob, undefined){
 	    })
 		.remove();	
 	    svg.selectAll("text").filter(function() {
-		return !(this.classList.contains('annotations-text')||this.classList.contains('annotations-content')||this.classList.contains('colormap'))
+		return !(this.classList.contains('annotations-text')||this.classList.contains('annotations-content')||this.classList.contains('colormap')||this.classList.contains('Not_Remove'))
 	    }).remove();
 	}
 
@@ -832,6 +849,8 @@ document.onload = (function(d3, saveAs, Blob, undefined){
     var svg4_width = width/3.1/12*7.8
     var control_svg_height = height/4.5;
     var svg4_height = height/1.5-control_svg_height-47;
+  	var a_s = 1.7,
+	    at_s = height/1.5/(svg4_height-40)*2;
 
     
     var svg = d3.select(settings.appendElSpec1).append("svg")
@@ -857,9 +876,9 @@ document.onload = (function(d3, saveAs, Blob, undefined){
 
     var left_s = 100,
 	width_s = svg_animation_width-82-15,
-	gap = 20,
-	top_s = 75,
-	top_t = top_s+gap*3+40;
+	gap = control_svg_height/10,
+	top_s = control_svg_height/3.8,
+	top_t = top_s+gap*5;
 	
 
     var ED_param = 0.5,
@@ -980,7 +999,7 @@ document.onload = (function(d3, saveAs, Blob, undefined){
 	.attr("x", svg_animation_width/2+10)
 	.attr("y", top_s+3*gap+10)
 	.attr("width", 2)
-	.attr("height", gap*3.5)
+	.attr("height", control_svg_height-top_s-3*gap-12)
 	.attr("fill", "#cbcbcb");
     
     var svg4 = d3.select(settings.appendElSpec4).append("svg")
@@ -1014,11 +1033,15 @@ document.onload = (function(d3, saveAs, Blob, undefined){
     }
 
     
-        insert_colormap_txt()
+
+    
+
+    
+    insert_colormap_txt()
     var scales_UV = {
 	'Nodes': ["#3288bd", "#66c2a5", "#abdda4", "#e6f598", "#fee08b", "#fdae61", "#f46d43", "#d53e4f"],
 	'Edges': [ "#252525", "#525252", "#737373", "#969696", "#bdbdbd", "#d9d9d9" ],
-	'setg':["#377eb8", "#e41a1c","#4daf4a","#984ea3","#ff7f00","#ffff33","#a65628","#f781bf"],
+	'setg':["#377eb8", "#e41a1c","#4daf4a","#984ea3","#ff7f00","#cbcbcb","#a65628","#f781bf"],
 	'set1':["#7fc97f", "#beaed4", "#fdc086", "#ffff99", "#386cb0"],
 	'set2':[ "#d7191c","#fdae61","#ffffbf","#abdda4","#2b83ba"],
 	'set3':[ "#fbb4ae","#b3cde3","#ccebc5","#decbe4","#fed9a6"],
@@ -1049,27 +1072,14 @@ document.onload = (function(d3, saveAs, Blob, undefined){
 
     
     d3.select("#svg-control").append("text")
-	.text("Parameters setting")
+	.text("Parameter Setting")
 	.style('fill', "white")
 	.attr("text-anchor", "middle")
     	.attr("class", "param-text")
 	.attr("dy", 25)
 	.attr("dx", control_svg_width/2);
     
-    d3.select("#trees-source").append("rect")
-	.attr("x", 0)
-	.attr("y", 0)
-	.attr("width",  width/3.3/12*4/6)
-	.attr("height", svg4_height/2-2)
-	.attr("fill", "#333");
-
-    d3.select("#trees-source").append("text")
-	.attr("dy", height/3.8/2.05/2)
-	.attr("class", "annotations-text")
-	.text("1-center")
-	.style('fill', 'white')
-	.attr("text-anchor", "middle")
-	.attr("transform", "translate(-45,100) rotate(270)");
+    
 
     var svg_target = d3.select("#Animation-Trees").append("svg")
 	.attr("width", svg_animation_width)
@@ -1077,20 +1087,10 @@ document.onload = (function(d3, saveAs, Blob, undefined){
 	.style("background-color", "white")
 	.attr("id", "trees-target");
 
-    d3.select("#trees-target").append("rect")
-	.attr("x", 0)
-	.attr("y", 0)
-	.attr("width",  width/3.3/12*4/6)
-	.attr("height", svg4_height/2-2)
-	.attr("fill", "#333");
-
-    d3.select("#trees-target").append("text")
-	.attr("dy", height/3.8/2.05/2)
-	.attr("class", "annotations-text")
-	.text("Selected Tree")
-	.attr("text-anchor", "middle")
-	.style('fill', 'white')
-	.attr("transform", "translate(-45,100) rotate(270)");
+    
+    add_titles_for_animation(d3.select("#trees-source"), "AMT")
+	add_titles_for_animation(d3.select("#trees-target"), "")
+    
     
     var graph = new GraphCreator(svg, nodes, edges, settings.appendElSpec1, height);
     graph.setIdCt(1);
@@ -1235,20 +1235,6 @@ document.onload = (function(d3, saveAs, Blob, undefined){
 	d3.select(id).text(context);
     }
 
-    function insert_annotation_animation(svg, id){
-	svg.selectAll(".annotations-text").remove();
-	var text = svg.selectAll(".annotations-text")
-	    .data([id]);
-
-	text.enter().append("text")
-	    .text(function(d){return "Tree "+d;})
-	    .attr("dy", height/3.8/2.05/2)
-	    .attr("class", "annotations-text")
-	    .attr("text-anchor", "middle")
-	    .style('fill', 'white')
-	    .attr("transform", "translate(-45,70) rotate(270)");
-
-    }
 
     function insert_legend(svg, l, maxn, scale){
 	// clear current legend
@@ -1501,12 +1487,6 @@ document.onload = (function(d3, saveAs, Blob, undefined){
 	draw_tree(edges, nodes, svg, circle, paths, 1, 'fixed');
     }
 
-    d3.select("#SCV1").append("text")
-	.text("Statistic circular");
-    d3.select("#SCV2").append("text")
-	.text("Statistic line");
-    d3.select("#SCV3").append("text")
-	.text("Statistic ribbon");
   
     d3.select("#start").on("click", function(){
 	remove_graph(svg3);
@@ -1528,6 +1508,85 @@ document.onload = (function(d3, saveAs, Blob, undefined){
 	    });	    
 	}
     });
+
+    function hide_colormap(){
+	if (hidden_flag_cm==0){
+	    d3.selectAll(".colormap").remove();
+	    d3.select('input[id="cmg1"]').node().type="hidden";
+	    d3.select('input[id="cmg2"]').node().type="hidden";
+	    d3.select('input[id="cmg3"]').node().type="hidden";
+	    d3.select('input[id="cmg4"]').node().type="hidden";
+	    d3.select('input[id="cmg5"]').node().type="hidden";
+	    d3.select('input[id="cmg6"]').node().type="hidden";
+	    d3.select('input[id="cmg7"]').node().type="hidden";
+	    d3.select('input[id="cmg8"]').node().type="hidden";
+	    hidden_flag_cm = 1;
+	}
+    }
+    function show_colormap(){
+	if (hidden_flag_cm==1){
+	    var y = document.getElementById("cmg1");
+	    y.type= "image";
+	    y = document.getElementById("cmg2");
+	    y.type= "image";
+	    y = document.getElementById("cmg3");
+	    y.type= "image";
+	    y = document.getElementById("cmg4");
+	    y.type= "image";
+	    y = document.getElementById("cmg5");
+	    y.type= "image";
+	    y = document.getElementById("cmg6");
+	    y.type= "image";
+	    y = document.getElementById("cmg7");
+	    y.type= "image";
+	    y = document.getElementById("cmg8");
+	    y.type= "image";
+	    insert_colormap_txt();
+	    hidden_flag_cm = 0;
+	}
+	
+    }
+
+    function hide_statistic_btn(){
+	if (hidden_flag_scv==0){
+	    d3.select('input[id="SSCV1"]').node().type="hidden";
+	    d3.select('input[id="SSCV2"]').node().type="hidden";
+	    d3.select('input[id="SSCV3"]').node().type="hidden";
+	    d3.select('input[id="CV1"]').node().type="hidden";
+	    d3.select('input[id="CV2"]').node().type="hidden";
+	    d3.select('input[id="CV3"]').node().type="hidden";
+	    var y = document.getElementById("CV21");
+	    y.type= "image";
+	    y = document.getElementById("CV22");
+	    y.type= "image";
+	    y = document.getElementById("CV23");
+	    y.type= "image";
+	    hidden_flag_scv = 1;
+	}
+    }
+
+    function show_statistic_btn(){
+	if (hidden_flag_scv==1){
+	    var y = document.getElementById("SSCV1");
+	    y.type= "image";
+	    y = document.getElementById("SSCV2");
+	    y.type= "image";
+	    y = document.getElementById("SSCV3");
+	    y.type= "image";
+	    y = document.getElementById("CV1");
+	    y.type= "image";
+	    y = document.getElementById("CV2");
+	    y.type= "image";
+	    y = document.getElementById("CV3");
+	    y.type= "image";
+
+	    d3.select('input[id="CV21"]').node().type="hidden";
+	    d3.select('input[id="CV22"]').node().type="hidden";
+	    d3.select('input[id="CV23"]').node().type="hidden";
+	    hidden_flag_scv=0;
+	}
+	
+    }
     
     
     function sent2python (Trees, svg_width, svg_height, svg, ED_param, GA_param, callback){
@@ -1582,21 +1641,13 @@ document.onload = (function(d3, saveAs, Blob, undefined){
 			    .range(scales_UV["Edges"]);
 			update_layout(IL_dists, colorScale)		
 			dt = DRAW_TREE(response, DS, svg, selected_node, circle, paths, colorScale, MTS);
-			draw_tree(response["UEdges-AMT"], response["UNodes-AMT"], svg_source, dt[0], dt[1], at_s, 'small', colorScale(0), svg_animation_width/4);
+			delete_annotation(svg4)
+			draw_tree(response["UEdges-AMT"], response["UNodes-AMT"], svg_source, dt[0], dt[1], at_s, 'small', colorScale(0), 10);
 			draw_tree(response["UEdges-AMT"], response["UNodes-AMT"], svg4, circle, paths, a_s, 'large', colorScale(0), svg4_width/20);
-			
-			if (hidden_flag==1){
-			    for (var i = 0; i < hidden_num; i++){
-				d3.select('input[type="hidden"]').node().type="image";
-			    }
-			    insert_colormap_txt()
-			    d3.select("#SCV1").append("text")
-				.text("Statistic circular");
-			    d3.select("#SCV2").append("text")
-				.text("Statistic line");
-			    d3.select("#SCV3").append("text")
-				.text("Statistic ribbon");
-			    hidden_flag=0;
+
+			show_statistic_btn();
+			if(DS!="LS"){
+			    show_colormap();  
 			}
 			
 			node.on("click", function(){
@@ -1606,40 +1657,23 @@ document.onload = (function(d3, saveAs, Blob, undefined){
 			    var selected_id = this.__data__.name
 			    selected_node = selected_id;
 			    if (selected_node=="AMT"){
-				if (hidden_flag==1){
-				    insert_colormap_txt();
-				    for (var i = 0; i < hidden_num; i++){
-					d3.select('input[type="hidden"]').node().type="image";
-				    }
-				    d3.select("#SCV1").append("text")
-					.text("Statistic circular");
-				    d3.select("#SCV2").append("text")
-					.text("Statistic line");
-				    d3.select("#SCV3").append("text")
-					.text("Statistic ribbon");
-				    hidden_flag=0;
+				show_statistic_btn();
+				if(DS!="LS"){
+				    show_colormap();
 				}
 			    }
 			    else{
-				if (hidden_flag==0){
-				    d3.select('input[name="SCV1"]').node().type="hidden";
-				    d3.select('input[name="SCV2"]').node().type="hidden";
-				    d3.select('input[name="SCV3"]').node().type="hidden";
-				    d3.select('input[id="cmg1"]').node().type="hidden";
-				    d3.select('input[id="cmg2"]').node().type="hidden";
-				    d3.select('input[id="cmg3"]').node().type="hidden";
-				    d3.select('input[id="cmg4"]').node().type="hidden";
-				    d3.select('input[id="cmg5"]').node().type="hidden";
-				    d3.select('input[id="cmg6"]').node().type="hidden";
-				    d3.select('input[id="cmg7"]').node().type="hidden";
-				    d3.select('input[id="cmg8"]').node().type="hidden";
-				    d3.select("#SCV1").selectAll("text").remove();
-				    d3.select("#SCV2").selectAll("text").remove();
-				    d3.select("#SCV3").selectAll("text").remove();
-				    d3.selectAll(".colormap").remove();
-				    hidden_flag=1;
-				    hidden_num = 11;
+				if(DS=="SUV1"||DS=="SUV2"||DS=="SUV3"){
+				    DS="UV";
+				    d3.selectAll(".CV").classed("selected-icon", false);
+				    d3.select("#CV21").classed("selected-icon", true);
 				}
+				disbtn3("CV")
+				hide_statistic_btn();
+				if(DS!="LS"){
+				    show_colormap();
+				}
+			
 			    }
 			    
 			    DRAW_TREE(response, DS, svg, selected_id, dt[0], dt[1], colorScale, MTS)
@@ -1692,7 +1726,7 @@ document.onload = (function(d3, saveAs, Blob, undefined){
 
 	var modify_y = 0;
 	if(mode=="small"){
-	    modify_y = 20;
+	    modify_y = 10;
 	}
 	
 	svg.selectAll('.legend').remove();
@@ -1727,16 +1761,16 @@ document.onload = (function(d3, saveAs, Blob, undefined){
 	paths.enter().append("path")
 	    .style("fill", function(d){
 		if (mode=='varying_line'){
-		    return "#333";
+		    return scales_UV["setg"][CM_g];
 		} else {
 		    return "none";
 		}	
 	    })
 	    .style("stroke", function(d){
 		if (mode=="Graduated_Lines"){
-		    return "#e3e4e8";
+		    return scales_UV["setg"][CM_g];
 		} else if  (mode=='varying_line'){
-		    return "#e3e4e8";
+		    return "#333";
 		} 
 		else{
 		    return "#333";
@@ -1746,7 +1780,7 @@ document.onload = (function(d3, saveAs, Blob, undefined){
 		    return 4/scale*ss+"px";
 		} else if(mode=="Graduated_Lines"){
 		    var tmp = Math.min(d.source["local-dist"], d.target["local-dist"])
-		    return (25*tmp+5)+"px"
+		    return (30*tmp)+"px"
 		} else if(mode=="varying_line"){
 		    return "1px";
 		}
@@ -1770,10 +1804,10 @@ document.onload = (function(d3, saveAs, Blob, undefined){
 	    
 	function Varying_Line(d){
 	    
-	    var x00 = d.source.x - (d.source["local-dist"]*15+5),
-		x01 = d.source.x + (d.source["local-dist"]*15+5),
-		x10 = d.target.x - (d.target["local-dist"]*15+5),
-		x11 = d.target.x + (d.target["local-dist"]*15+5),
+	    var x00 = d.source.x - (d.source["local-dist"]*20),
+		x01 = d.source.x + (d.source["local-dist"]*20),
+		x10 = d.target.x - (d.target["local-dist"]*20),
+		x11 = d.target.x + (d.target["local-dist"]*20),
 		y0 = d.source.y,
 		y1 = d.target.y,
 		x0 = d.source.x,
@@ -1829,7 +1863,7 @@ document.onload = (function(d3, saveAs, Blob, undefined){
 	circleEnter.append("circle")
 	    .attr("r", function(d){
 		if (mode=="varying_node"){
-		    return String(15/scale*ss*d['local-dist']+15);
+		    return String(30/scale*ss*d['local-dist']);
 		} else if(mode=="Graduated_Lines"||mode=="varying_line"){
 		    return 15;
 		}
@@ -1926,7 +1960,7 @@ document.onload = (function(d3, saveAs, Blob, undefined){
 	if (edge_color!=null){
 	    circle.select('circle').style("fill", function(d, i){
 		if (scale==1){
-		    return "#cbcbcb";
+		    return scales_UV["setg"][CM_g];
 		} else{
 		    return colorScale(l_dists[i]);
 		}
@@ -2093,8 +2127,8 @@ document.onload = (function(d3, saveAs, Blob, undefined){
 		    .style("stroke", scales_UV["setg"][CM_g])
 		    .style("stroke-width", function(d){
 			if(mode=="Graduated_Lines"){
-			    var tmp = Math.min(d.source["local-dist"], d.target["local-dist"])
-			    var idx = [d.source["local-dist"], d.target["local-dist"]].indexOf(tmp);
+			    var tmp = Math.min(d.source['glocal-dist'][tid]["tree-"+(tid+1)], d.target['glocal-dist'][tid]["tree-"+(tid+1)])
+			    var idx = [d.source['glocal-dist'][tid]["tree-"+(tid+1)], d.target['glocal-dist'][tid]["tree-"+(tid+1)]].indexOf(tmp);
 			    if(idx==0){
 				tmp = d.source['glocal-dist'][tid]["tree-"+(tid+1)];
 			    }else{
@@ -2129,10 +2163,10 @@ document.onload = (function(d3, saveAs, Blob, undefined){
 		    x10 = d.target.x - 5,
 		    x11 = d.target.x + 5;
 	    } else{	
-		var x00 = d.source.x - (d.source['glocal-dist'][tid]["tree-"+(tid+1)]*30+5),
-		    x01 = d.source.x + (d.source['glocal-dist'][tid]["tree-"+(tid+1)]*30+5),
-		    x10 = d.target.x - (d.target['glocal-dist'][tid]["tree-"+(tid+1)]*30+5),
-		    x11 = d.target.x + (d.target['glocal-dist'][tid]["tree-"+(tid+1)]*30+5);
+		var x00 = d.source.x - (d.source['glocal-dist'][tid]["tree-"+(tid+1)]*35),
+		    x01 = d.source.x + (d.source['glocal-dist'][tid]["tree-"+(tid+1)]*35),
+		    x10 = d.target.x - (d.target['glocal-dist'][tid]["tree-"+(tid+1)]*35),
+		    x11 = d.target.x + (d.target['glocal-dist'][tid]["tree-"+(tid+1)]*35);
 	    };
 	    var y0 = d.source.y,
 		y1 = d.target.y,
@@ -2140,11 +2174,11 @@ document.onload = (function(d3, saveAs, Blob, undefined){
 		x1 = d.target.x;
 
 	    var curvature = 0.95;
-	    if (d.source["local-dist"]>d.target["local-dist"]){
+	    if (d.source['glocal-dist'][tid]["tree-"+(tid+1)]>d.target['glocal-dist'][tid]["tree-"+(tid+1)]){
 		curvature = 0.05;
 	    };
 
-	    if (Math.abs(d.source["local-dist"]-d.target["local-dist"])<0.1){
+	    if (Math.abs(d.source['glocal-dist'][tid]["tree-"+(tid+1)]-d.target['glocal-dist'][tid]["tree-"+(tid+1)])<0.1){
 		curvature = 0.5;
 	    }
 	    
@@ -2219,8 +2253,8 @@ document.onload = (function(d3, saveAs, Blob, undefined){
 	    .attr('class', 'nodes')
 
 	if(mode=="varying_node"){
-	    circleEnter.append("circle")
-		.attr("r", 10)
+	     circleEnter.append("circle")
+		.attr("r", 3)
 		.style("fill", function(d){
 		    //return colorScale(d['local-dist']);
 		    return scales_UV["setg"][CM_g];
@@ -2236,7 +2270,7 @@ document.onload = (function(d3, saveAs, Blob, undefined){
 	    for (var tid=0; tid<Tcnt; tid++){
 		circleEnter.append("circle")
 		    .attr("r", function(d){
-			return String(40/scale*ss*d['glocal-dist'][tid]["tree-"+(tid+1)]+10);
+			return String(50/scale*ss*d['glocal-dist'][tid]["tree-"+(tid+1)]+3);
 		    })
 		    .style("fill", function(d){
 			//return colorScale(d['local-dist']);
@@ -2441,30 +2475,30 @@ document.onload = (function(d3, saveAs, Blob, undefined){
 	if(AM=='LA'){
 	    if(AM_c=='LS'){
 		dt = animation(response, svg4, dt[0], dt[1], selected_id, null, null, a_s, svg4_width/20);
-		dt_source = draw_tree(response["UEdges-AMT"], response["UNodes-AMT"], svg_source, dt[0], dt[1], at_s, 'small', null, svg_animation_width/4);
-		dt_target = draw_tree(response["Edges-"+selected_id], response["Nodes-"+selected_id], svg_target, dt[0], dt[1], at_s, 'small', null, svg_animation_width/4);
+		dt_source = draw_tree(response["UEdges-AMT"], response["UNodes-AMT"], svg_source, dt[0], dt[1], at_s, 'small', null, 10);
+		dt_target = draw_tree(response["Edges-"+selected_id], response["Nodes-"+selected_id], svg_target, dt[0], dt[1], at_s, 'small', null, 10);
 		insert_annotation_animation(svg_target, selected_id);
 		insert_annotation(svg4, ['#8e0c01', '#006400', '#2b303c'], ['white', 'white', '#2b303c'], ['original labeled leaf', 'newly labeled leaf', "internal vertex"], 100);
 	    }else{
 		delete_annotation(svg4);
 		dt = animation(response, svg4, dt[0], dt[1], selected_id, colorScale(0), colorScale(response["IL-dist-"+selected_id]), a_s, svg4_width/20);
-		dt_source = draw_tree(response["UEdges-AMT"], response["UNodes-AMT"], svg_source, dt[0], dt[1], at_s, 'small', colorScale(0), svg_animation_width/4);
-		dt_target = draw_tree(response["Edges-"+selected_id], response["Nodes-"+selected_id], svg_target, dt[0], dt[1], at_s, 'small', colorScale(response["IL-dist-"+selected_id]), svg_animation_width/4);
+		dt_source = draw_tree(response["UEdges-AMT"], response["UNodes-AMT"], svg_source, dt[0], dt[1], at_s, 'small', colorScale(0), 10);
+		dt_target = draw_tree(response["Edges-"+selected_id], response["Nodes-"+selected_id], svg_target, dt[0], dt[1], at_s, 'small', colorScale(response["IL-dist-"+selected_id]), 10);
 		insert_annotation_animation(svg_target, selected_id);
 	    }
 	}
 	else{
 	    if(AM_c=='LS'){
 		dt = geodesic_animation(response, svg4, dt[0], dt[1], selected_id, null, a_s, svg4_width/20);
-		dt_source = draw_tree(response["UEdges-AMT"], response["UNodes-AMT"], svg_source, dt[0], dt[1], at_s, 'small', null, svg_animation_width/4);
-		dt_target = draw_tree(response["Edges-"+selected_id], response["Nodes-"+selected_id], svg_target, dt[0], dt[1], at_s, 'small', null, svg_animation_width/4);
+		dt_source = draw_tree(response["UEdges-AMT"], response["UNodes-AMT"], svg_source, dt[0], dt[1], at_s, 'small', null, 10);
+		dt_target = draw_tree(response["Edges-"+selected_id], response["Nodes-"+selected_id], svg_target, dt[0], dt[1], at_s, 'small', null, 10);
 		insert_annotation_animation(svg_target, selected_id);
 		insert_annotation(svg4, ['#8e0c01', '#006400', '#2b303c'], ['white', 'white', '#2b303c'], ['original labeled leaf', 'newly labeled leaf', "internal vertex"], 100);
 	    }else{
 		delete_annotation(svg4);
 		dt = geodesic_animation(response, svg4, dt[0], dt[1], selected_id, colorScale, a_s, svg4_width/20);
-		dt_source = draw_tree(response["UEdges-AMT"], response["UNodes-AMT"], svg_source, dt[0], dt[1], at_s, 'small', colorScale(0), svg_animation_width/4);
-		dt_target = draw_tree(response["Edges-"+selected_id], response["Nodes-"+selected_id], svg_target, dt[0], dt[1], at_s, 'small', colorScale(response["IL-dist-"+selected_id]), svg_animation_width/4);
+		dt_source = draw_tree(response["UEdges-AMT"], response["UNodes-AMT"], svg_source, dt[0], dt[1], at_s, 'small', colorScale(0), 10);
+		dt_target = draw_tree(response["Edges-"+selected_id], response["Nodes-"+selected_id], svg_target, dt[0], dt[1], at_s, 'small', colorScale(response["IL-dist-"+selected_id]), 10);
 		insert_annotation_animation(svg_target, selected_id);
 	    }
 	}
@@ -2551,6 +2585,7 @@ document.onload = (function(d3, saveAs, Blob, undefined){
 	    .transition()
 	    .delay(500)
 	    .duration(1000)
+	    .attr("class", function(d){return d.cls;})
 	    .attr("transform", function(d){
 		return "translate(" + (d.x/scaler+modify_x) + "," + d.y/scaler + ")";})
 	    .style("stroke", function(d){
@@ -2655,6 +2690,7 @@ document.onload = (function(d3, saveAs, Blob, undefined){
 	    .transition()
 	    .delay(2000)
 	    .duration(1000)
+	    .attr("class", function(d){return d.cls;})
 	    .attr("transform", function(d){
 		return "translate(" + (d.x/scaler+modify_x) + "," + d.y/scaler + ")";})
 	    .style("stroke", function(d){
@@ -2821,6 +2857,7 @@ document.onload = (function(d3, saveAs, Blob, undefined){
 		.transition()
 		.delay(500+(dur_time+del_time)*i)
 		.duration(dur_time)
+		.attr("class", function(d){return d.cls;})
 		.attr("transform", function(d){
 		    return "translate(" + (d.x/scaler+modify_x) + "," + d.y/scaler + ")";})
 		.style("stroke", function(d){
@@ -2947,6 +2984,7 @@ document.onload = (function(d3, saveAs, Blob, undefined){
 		.transition()
 		.delay(tt+500+(dur_time+del_time)*j)
 		.duration(dur_time)
+		.attr("class", function(d){return d.cls;})
 		.attr("transform", function(d){
 		    return "translate(" + (d.x/scaler+modify_x) + "," + d.y/scaler + ")";})
 		.style("stroke", function(d){
