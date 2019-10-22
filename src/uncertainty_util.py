@@ -13,11 +13,23 @@ def calculate_IL_dist_for_Trees(Trees, Tcnt, Ms, M):
     for i in range(0, Tcnt):
         Trees['tree-'+str(i+1)]['IL-dist'] = infinity_norm(Ms[i], M)
     return Trees
-
+"""
 def infinity_norm(M1, M2):
     M1 = fill_sym_matrix(M1)
     M2 = fill_sym_matrix(M2)
     return  np.linalg.norm(M1-M2, np.inf)
+"""
+
+def infinity_norm(M1, M2):
+    M1 = fill_sym_matrix(M1)
+    M2 = fill_sym_matrix(M2)
+    M = M1-M2
+    M = M.flatten()
+    for i in range(len(M)):
+        if M[i] < 0:
+	   M[i] = -M[i]
+    return max(M)
+
 
 def calculate_IL_dist_for_GA(MGs, Tcnt, M, GA_param):
     for i in range(0, Tcnt):
