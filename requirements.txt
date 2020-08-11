@@ -1,7 +1,7 @@
-Flask==0.10.1
-Jinja2==2.8
+Flask==0.12.3
+Jinja2==2.8.1
 MarkupSafe==0.23
-Werkzeug==0.15.3
+Werkzeug==0.15.5
 itsdangerous==0.24
 wsgiref==0.1.2
 networkx==2.2
