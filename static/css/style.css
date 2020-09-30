@@ -350,6 +350,29 @@ p{
     cursor: pointer;
 }
 
+#toolbox-download{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin-bottom: 0.5em;
+    margin-left: 1.2em;
+    border: 2px solid #EEEEEE;
+    border-radius: 5px;
+    padding: 1em;
+    z-index: 5;
+}
+
+
+#toolbox-download input{
+    width: 30px;
+    opacity: 0.4;
+}
+
+#toolbox-download input:hover{
+    opacity: 1;
+    cursor: pointer;
+}
+
 
 #toolbox-Go{
     position: absolute;

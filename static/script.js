@@ -1384,6 +1384,21 @@ document.onload = (function(d3, saveAs, Blob, undefined){
 	    alert('Click "start calculate" first when you finished adding trees.\nClick a node to show corresponding tree.\nClick edge to show the animation of deformation between selected tree and average tree.');
 	});
 
+    d3.select("#download-input").on("click", function(){
+	var downTrees = {};
+	for(var i = 0; i < tids.length; i++){
+	    downTrees["input-nodes-" + tids[i]] = Trees['Nodes-' + tids[i]];
+	    downTrees["input-edges-" + tids[i]] = Trees['Edges-' + tids[i]];
+	    downTrees["label-nodes-" + tids[i]] = nTrees['Nodes-' + tids[i]];
+	    downTrees["label-edges-" + tids[i]] = nTrees['Edges-' + tids[i]];
+	    downTrees['Edges-AMT'] = nTrees['Edges-AMT'];
+	    downTrees['Nodes-AMT'] = nTrees['Nodes-AMT']
+	}
+	
+	var blob = new Blob([window.JSON.stringify(downTrees)], {type: "text/plain;charset=utf-8"});
+	saveAs(blob, "mergeTrees.json");
+    });
+
     function delete_annotation(svg){
 	svg.selectAll(".annotations").remove();
 	svg.selectAll(".annotations-text").remove();
